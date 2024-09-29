@@ -1,0 +1,1298 @@
+{
+	"info": {
+		"_postman_id": "00258423-75e7-437e-981f-49f34f7b4b07",
+		"name": "Content Hub ONE - Content Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30621719"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "GENERATE Bearer Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "https://api.sitecorecloud.io",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{authUrl}}/oauth/token",
+							"host": [
+								"{{authUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content Types",
+			"item": [
+				{
+					"name": "Create Content Type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"products\",\r\n  \"name\": {\r\n    \"en-US\": \"Products\"\r\n  },\r\n  \"description\": {\r\n    \"en-US\": \"collection of products\"\r\n  },\r\n  \"fields\": [\r\n    {\r\n      \"id\": \"productName\",\r\n      \"name\": {\r\n        \"en-US\": \"Product Name\"\r\n      },\r\n      \"type\": \"ShortText\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productDescription\",\r\n      \"name\": {\r\n        \"en-US\": \"Product Description\"\r\n      },\r\n      \"type\": \"LongText\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productQuantity\",\r\n      \"name\": {\r\n        \"en-US\": \"Quantity\"\r\n      },\r\n      \"type\": \"Integer\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productImage\",\r\n      \"name\": {\r\n        \"en-US\": \"Image\"\r\n      },\r\n      \"type\": \"Media\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productPrice\",\r\n      \"name\": {\r\n        \"en-US\": \"Price\"\r\n      },\r\n      \"type\": \"ShortText\",\r\n      \"required\": \"false\"\r\n      \r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/types",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Content Type by {contentTypeId}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": {\r\n    \"en-US\": \"Products\"\r\n  },\r\n  \"description\": {\r\n    \"en-US\": \"collection of products\"\r\n  },\r\n  \"fields\": [\r\n     {\r\n      \"id\": \"productName\",\r\n      \"name\": {\r\n        \"en-US\": \"Product Name\"\r\n      },\r\n      \"type\": \"ShortText\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productDescription\",\r\n      \"name\": {\r\n        \"en-US\": \"Product Description\"\r\n      },\r\n      \"type\": \"LongText\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productQuantity\",\r\n      \"name\": {\r\n        \"en-US\": \"Quantity\"\r\n      },\r\n      \"type\": \"Integer\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productImage\",\r\n      \"name\": {\r\n        \"en-US\": \"Image\"\r\n      },\r\n      \"type\": \"Media\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n      \"id\": \"productPrice\",\r\n      \"name\": {\r\n        \"en-US\": \"Price\"\r\n      },\r\n      \"type\": \"ShortText\",\r\n      \"required\": \"false\"\r\n      \r\n    },\r\n    {\r\n        \"id\": \"releatedProducts\",\r\n        \"name\": {\r\n            \"en-US\": \"Related Products\"\r\n        },\r\n        \"type\": \"Reference\",\r\n        \"required\": false,\r\n        \"helpText\": {\r\n            \"en-US\": \"\"\r\n        }\r\n    }\r\n\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/types/:contentTypeId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"types",
+								":contentTypeId"
+							],
+							"variable": [
+								{
+									"key": "contentTypeId",
+									"value": "products"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Content Type by {ontentTypeId}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/types/:contentTypeId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"types",
+								":contentTypeId"
+							],
+							"variable": [
+								{
+									"key": "contentTypeId",
+									"value": "homepage"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Content Type by {contentTypeId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/types/:contentTypeId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"types",
+								":contentTypeId"
+							],
+							"variable": [
+								{
+									"key": "contentTypeId",
+									"value": "products"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "Create Content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contentTypeId\": \"products\",\r\n  \"id\": \"pear\",\r\n  \"name\": \"Pear\",\r\n  \"fields\": {\r\n    \"productName\": {\r\n      \"value\":\"Delicious pear.\", \r\n      \"type\": \"ShortText\"\r\n    },\r\n    \"productDescription\": {\r\n      \"value\":\"This pear is sweet and tasty. Have a bite and enjoy the taste.\", \r\n      \"type\": \"LongText\"\r\n    },\r\n    \"productQuantity\": {\r\n      \"value\":\"4\", \r\n      \"type\": \"Integer\"\r\n    },\r\n    \"productImage\": {\r\n        \"value\": [\r\n        {\r\n          \"type\": \"Link\",\r\n          \"relatedType\": \"Media\",\r\n          \"id\": \"i51y3q2PyUms7ZnYMdhrtQ\",\r\n          \"uri\": \"http://content-api.sitecorecloud.io/api/content/v1/media/i51y3q2PyUms7ZnYMdhrtQ\"\r\n        }\r\n      ],\r\n      \"type\": \"Media\"\r\n    },\r\n    \"productPrice\": {\r\n      \"value\":\"2,45\", \r\n      \"type\": \"ShortText\"\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Content",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId/publish",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "strawberry"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unpublish Publish Content",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId/publish",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "1VcOwIfbqk6toyJiKuOWWg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Content Items",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items?pageNumber=1&pageSize=1&system.contentType.id=products&name=Apple&search=Apple&sortBy=name",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								},
+								{
+									"key": "system.contentType.id",
+									"value": "products"
+								},
+								{
+									"key": "name",
+									"value": "Apple"
+								},
+								{
+									"key": "search",
+									"value": "Apple"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Content Item by {contentItemId}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "apple"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Content by {contentItemId}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"banana\",\r\n  \"name\": \"Delicious Banana\",\r\n  \"fields\": {\r\n    \"description\": {\r\n      \"value\":\"This delicious Banana is sweat and tasty. Have a bite and enjoy the taste.\", \r\n      \"type\": \"LongText\"\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "banana"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Content by {contentItemId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "banana"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Content by {contentItemId} without approval from Edge",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/items/:contentItemId/publish",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"items",
+								":contentItemId",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "contentItemId",
+									"value": "pear"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Media",
+			"item": [
+				{
+					"name": "Get Media List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media?pageSize=14&pageNumber=1",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "14"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Media",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"pear\",\r\n    \"name\": \"Pear\",\r\n    \"description\": \"Image of pears\",\r\n    \"fileId\": \"177a0f90693f4aaaac4e4b609918a2a4\"\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Media by {mediaItemId}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media/:mediaItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media",
+								":mediaItemId"
+							],
+							"variable": [
+								{
+									"key": "mediaItemId",
+									"value": "pear"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Media by {mediaItemId}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"pear\",\r\n    \"name\": \"Pear\",\r\n    \"description\": \"Most delicious pears in the world\",\r\n    \"fileId\": \"177a0f90693f4aaaac4e4b609918a2a4\"\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media/:mediaItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media",
+								":mediaItemId"
+							],
+							"variable": [
+								{
+									"key": "mediaItemId",
+									"value": "pear"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Media by {mediaItemId}",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media/:mediaItemId/publish",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media",
+								":mediaItemId",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "mediaItemId",
+									"value": "pear"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Media by {mediaItemId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media/:mediaItemId",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media",
+								":mediaItemId"
+							],
+							"variable": [
+								{
+									"key": "mediaItemId",
+									"value": "NY1Ycb5NhUKs9-lN6gjKOQ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Media by {mediaItemId} without approval from Edge",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/media/:mediaItemId/publish",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"media",
+								":mediaItemId",
+								"publish"
+							],
+							"variable": [
+								{
+									"key": "mediaItemId",
+									"value": "NY1Ycb5NhUKs9-lN6gjKOQ"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Media API",
+			"item": [
+				{
+					"name": "Generate Upload Link",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-mms-content-type",
+								"value": "image/jpeg",
+								"type": "text"
+							},
+							{
+								"key": "x-mms-content-length",
+								"value": "13213",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip,deflate,br",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"filename\": \"pear.jpg\"\r\n}"
+						},
+						"url": {
+							"raw": "{{mediaManagementUrl}}/api/media/v1/upload/link/generate",
+							"host": [
+								"{{mediaManagementUrl}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"v1",
+								"upload",
+								"link",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Asset",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Application",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/sebw/OneDrive - Sitecore/Sebastian/Content Hub One/Getting Started Series/04-CH1-Content API/raw/pear.jpg"
+							}
+						},
+						"url": {
+							"raw": "https://mms-storage-weu.sitecorecloud.io/df4c80ea-db67-49f8-bcd3-08daadeee4f5-files/177a0f90693f4aaaac4e4b609918a2a4?se=2023-01-12T14%3a42%3a23Z&sig=7QbJfAtlb7DQzG3QmL5ZDhdcXTjmkuK9x0JsX86hBsY%3d",
+							"protocol": "https",
+							"host": [
+								"mms-storage-weu",
+								"sitecorecloud",
+								"io"
+							],
+							"path": [
+								"df4c80ea-db67-49f8-bcd3-08daadeee4f5-files",
+								"177a0f90693f4aaaac4e4b609918a2a4"
+							],
+							"query": [
+								{
+									"key": "se",
+									"value": "2023-01-12T14%3a42%3a23Z"
+								},
+								{
+									"key": "sig",
+									"value": "7QbJfAtlb7DQzG3QmL5ZDhdcXTjmkuK9x0JsX86hBsY%3d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete the Upload",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-mms-content-length",
+								"value": "13223",
+								"type": "text"
+							},
+							{
+								"key": "x-mms-content-type",
+								"value": "image/jpeg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fileId\": \"177a0f90693f4aaaac4e4b609918a2a4\"\r\n}"
+						},
+						"url": {
+							"raw": "{{mediaManagementUrl}}/api/media/v1/upload/link/complete",
+							"host": [
+								"{{mediaManagementUrl}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"v1",
+								"upload",
+								"link",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ApiKey",
+			"item": [
+				{
+					"name": "Get ApiKeys",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/apikeys?pageSize=0&pageNumber=0",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"apikeys"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "0"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ApiKey by {apiKeyHash}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/apikeys/:apiKeyHash",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"apikeys",
+								":apiKeyHash"
+							],
+							"variable": [
+								{
+									"key": "apiKeyHash",
+									"value": "916c8eb5b45ee2f1c4ebed5ddff03bb23faa4bd47e4818c332e5a2108be84471"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ApiKey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"MySampleAPIKey\",\r\n    \"type\": \"delivery\"\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/apikeys",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"apikeys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ApiKey by {apiKeyHash}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"MySampleDeliveryAPIKey\"\r\n}"
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/apikeys/:apiKeyHash",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"apikeys",
+								":apiKeyHash"
+							],
+							"variable": [
+								{
+									"key": "apiKeyHash",
+									"value": "916c8eb5b45ee2f1c4ebed5ddff03bb23faa4bd47e4818c332e5a2108be84471"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{contentUrl}}/api/content/v1/users?pageSize=1&pageNumber=1",
+							"host": [
+								"{{contentUrl}}"
+							],
+							"path": [
+								"api",
+								"content",
+								"v1",
+								"users"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "1"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "XXXXXXXX",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authUrl",
+			"value": "https://auth.sitecorecloud.io"
+		},
+		{
+			"key": "contentUrl",
+			"value": "https://content-api.sitecorecloud.io"
+		},
+		{
+			"key": "mediaManagementUrl",
+			"value": "https://mms-upload.sitecorecloud.io"
+		},
+		{
+			"key": "mediaDeliveryUrl",
+			"value": "https://mms-delivery.sitecorecloud.io"
+		},
+		{
+			"key": "client_id",
+			"value": "XXXXXXXX",
+			"type": "string"
+		},
+		{
+			"key": "client_secret",
+			"value": "XXXXXXXX",
+			"type": "string"
+		}
+	]
+}
